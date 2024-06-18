@@ -1,7 +1,4 @@
-export const NavbarLinks : {
-  title:string,
-  path?:string
-}[] = [
+export const Navdata = [
   {
     title: "Home",
     path: "/",

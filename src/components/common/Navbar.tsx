@@ -3,7 +3,7 @@ import logo from "../../assets/Logo/Logo-Full-Light.png"
 import { Link, matchPath } from 'react-router-dom'
 import Buttoncomponent from '../core/Homepage/Buttoncomponent'
 import { HiSearch } from 'react-icons/hi'
-import { NavbarLinks } from '../../data/navbar-links'
+import { Navdata } from '../../data/navbar-links'
 import { BsChevronDown } from 'react-icons/bs'
 import { useLocation } from 'react-router-dom'
 
@@ -14,6 +14,12 @@ const Navbar: React.FC = () => {
     return matchPath({ path: routes }, location.pathname)
   }
 
+  type Navlinks={
+    title:string,
+    path?:string
+  }[]
+  const NavbarLinks:Navlinks=Navdata
+  
   return (
     <div className='w-full flex h-[60px] py-3 border-b  border-[#52525B]'>
       <div className='max-w-[1250px] w-[90%] mx-auto flex justify-between items-center'>
