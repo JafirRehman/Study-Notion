@@ -1,6 +1,9 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
+type ProfileState = {
+    user: null | {}
+}
+const initialState : ProfileState= {
     user: null,
 }
 
@@ -8,7 +11,7 @@ const profileSlice = createSlice({
     name: "profile",
     initialState: initialState,
     reducers: {
-        setUser(state, value) {
+        setUser:(state, value:PayloadAction<null | {}>) => {
             state.user = value.payload
         }
     }
