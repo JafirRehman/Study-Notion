@@ -1,12 +1,19 @@
 import React from 'react'
 import logo from "../../assets/Logo/Logo-Full-Light.png"
-import { Link } from 'react-router-dom'
+import { Link, matchPath } from 'react-router-dom'
 import Buttoncomponent from '../core/Homepage/Buttoncomponent'
 import { HiSearch } from 'react-icons/hi'
 import { NavbarLinks } from '../../data/navbar-links'
 import { BsChevronDown } from 'react-icons/bs'
+import { useLocation } from 'react-router-dom'
 
 const Navbar: React.FC = () => {
+
+  const location = useLocation()
+  const matchRoutes = (routes : string) => {
+    return matchPath({ path: routes }, location.pathname)
+  }
+
   return (
     <div className='w-full flex h-[60px] py-3 border-b  border-[#52525B]'>
       <div className='max-w-[1250px] w-[90%] mx-auto flex justify-between items-center'>
@@ -23,7 +30,7 @@ const Navbar: React.FC = () => {
                 <li key={index}>
                   {
                     link.path ? (
-                      <Link to={link.path}>{link.title}</Link>
+                      <Link className={`${matchRoutes(link.path) && "text-ourred-500"}`} to={link.path}>{link.title}</Link>
                     ) : (
                       <div className='flex cursor-pointer items-center gap-2'>
                         <span>{link.title}</span>
