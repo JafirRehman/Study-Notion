@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 type ProfileState = {
-    user: null | {}
+    user: null | any
 }
 const initialState : ProfileState= {
     user: null,

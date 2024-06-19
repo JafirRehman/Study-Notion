@@ -22,5 +22,3 @@ const authSlice = createSlice({
 export const { setToken } = authSlice.actions;
 export default authSlice.reducer;
 
-//export type Roottype=ReturnType<typeof store.getState>
-//export type AppDispatch = typeof store.dispatch
