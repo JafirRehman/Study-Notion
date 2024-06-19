@@ -74,7 +74,12 @@ const Navbar: React.FC = () => {
           </button>
           {
             user && user.accountType !== "Instructor" && (
-              <Link to={'/dashboard/cart'}><TiShoppingCart className='text-[30px]' /></Link>
+              <Link to={'/dashboard/cart'} className='relative'>
+                <TiShoppingCart className='text-[30px]' />
+                {
+                  totalItems > 0 && <span className='absolute bottom-0 right-0 bg-ourred-500  rounded-full w-6 h-6 text-ourred-50 text-center text-[10px]'>{totalItems}</span>
+                }
+              </Link>
             )
           }
         </div>
