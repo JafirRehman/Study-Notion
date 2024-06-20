@@ -12,6 +12,8 @@ import { TiShoppingCart } from 'react-icons/ti'
 import { useEffect, useState } from 'react';
 import { apiConnector } from '../../services/apiConnector'
 import { categories } from '../../services/apis'
+import { RxDashboard } from "react-icons/rx";
+import { IoIosLogOut } from "react-icons/io";
 
 const Navbar: React.FC = () => {
 
@@ -76,11 +78,11 @@ const Navbar: React.FC = () => {
                       <div className='flex cursor-pointer items-center relative gap-2 group'>
                         <p>{link?.title}</p>
                         <BsChevronDown className='text-[1rem]' />
-                        <div className='translate-x-[-50%] left-[50%] w-[270px] invisible group-hover:visible opacity-0 group-hover:opacity-100 duration-300  absolute top-16 bg-ourred-50 z-10 text-black p-5 flex flex-col text-[1.5rem] rounded-xl'>
-                          <div className='w-5 h-5 absolute translate-x-[183%] left-[50%] -top-2 rotate-45 bg-ourred-50'></div>
+                        <div className='border border-[#52525B] translate-x-[-50%] left-[50%] w-[270px] invisible group-hover:visible opacity-0 group-hover:opacity-100 duration-300  absolute top-14 bg-[#18181B]  z-20 text-ourred-50 p-5 flex flex-col text-[1.5rem] rounded-xl'>
+                          <div className='border border-r-0 border-b-0 border-[#52525B] -z-10 w-5 h-5 absolute translate-x-[183%] left-[50%] -top-3 rotate-45 bg-[#18181B]'></div>
                           {
                             sublinks?.map((category, index) => (
-                              <Link key={index} to={'/'} className='hover:bg-[#C5C7D4] p-5 rounded-xl duration-300'>{category?.name}</Link>
+                              <Link key={index} to={'/'} className='hover:bg-[#0E0E11] p-5 rounded-xl duration-300'>{category?.name}</Link>
                             ))
                           }
                         </div>
@@ -116,6 +118,29 @@ const Navbar: React.FC = () => {
               </Link>
             )
           }
+          <div className='flex flex-row items-center gap-2 relative'>
+            <button className=''>
+              <img className='w-[30px] h-[30px] rounded-full' src='https://api.dicebear.com/6.x/initials/svg?seed=jafir malana&backgroundColor=00897b,00acc1,039be5,1e88e5,3949ab,43a047,5e35b1,7cb342,8e24aa,c0ca33,d81b60,e53935,f4511e,fb8c00,fdd835,ffb300,ffd5dc,ffdfbf,c0aede,d1d4f9,b6e3f4&backgroundType=solid,gradientLinear&backgroundRotation=0,360,-350,-340,-330,-320&fontFamily=Arial&fontWeight=600' />
+            </button>
+            <BsChevronDown className='text-[1rem]' />
+            <div className='border border-[#52525B]  translate-x-[-50%] left-[50%] visible group-hover:visible opacity-100 group-hover:opacity-100 duration-300  absolute top-16 bg-[#18181B]  z-20 text-ourred-50 flex flex-col text-[1.5rem] rounded-xl'>
+              <div className='border border-r-0 border-b-0 border-[#52525B] w-5 h-5 absolute translate-x-[90%] left-[50%] -top-3 rotate-45 bg-[#18181B]'></div>
+              <div className='m-[-1px] m-b-[-2px] border border-[#52525B] hover:bg-[#0E0E11] rounded-b-none rounded-xl p-5'>
+                <Link to={'/myprofile'} className='flex items-center gap-4'>
+                  <RxDashboard />
+                  <span>Dashboard</span>
+                </Link>
+              </div>
+              <div className='m-[-1px] border border-[#52525B] hover:bg-[#0E0E11] rounded-t-none rounded-xl p-5'>
+                <button className='flex gap-4 items-center'>
+                  <IoIosLogOut />
+                  <span>Logout</span>
+                </button>
+              </div>
+            </div>
+
+          </div>
+
         </div>
       </div>
     </div>
