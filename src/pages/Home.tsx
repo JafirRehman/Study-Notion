@@ -10,14 +10,14 @@ import Indemandskills from '../components/core/Homepage/Indemandskills';
 
 const Home: React.FC = () => {
   return (
-    <div className='mt-32 w-[90%] max-w-[1250px] mx-auto'>
+    <div className='mt-20 w-[90%] max-w-[1250px] mx-auto'>
 
       <section className='w-full text-white gap-12 flex flex-col items-center justify-center'> {/* first section */}
 
         <Link to={'/signup'} className='rounded-full'>
-          <div className='bg-[#18181B] drop-shadow-[0_1.5px_rgba(216,40,78,1)] 
+          <div className='bg-[#18181B] drop-shadow-[0_1.5px_rgb(252,55,111)]
             hover:drop-shadow-none text-ourred-50 hover:scale-[0.93] font-bold 
-            transition-all duration-300 hover:border-2  hover:text-ourred-500 border-ourred-500 flex flex-row gap-3 items-center 
+            transition-all duration-200 hover:border-2  border-ourred-500 flex flex-row gap-3 items-center 
             justify-center rounded-full  px-10 py-2 sm:px-16 text-[1.3rem] sm:py-4 sm:text-[1.8rem]'>
             <p>Become an Istructor</p>
             <FaArrowRight className='mt-2 text-ourred-500 text-[1.2rem] sm:text-[1.7rem]' />
