@@ -11,13 +11,13 @@ const ProfileDropDown: React.FC = () => {
 
     const dropdownref = useRef<HTMLDivElement>(null)
 
-    useOnClickOutside(dropdownref, () => setOpen(false))
+    useOnClickOutside([dropdownref], () => setOpen(false))
 
     return (
         <div className='relative' ref={dropdownref}>
             <button className='flex flex-row items-center gap-2' onClick={() => setOpen(pre => !pre)} >
                 <img className='w-[30px] h-[30px] rounded-full' src='https://api.dicebear.com/6.x/initials/svg?seed=jafir malana&backgroundColor=00897b,00acc1,039be5,1e88e5,3949ab,43a047,5e35b1,7cb342,8e24aa,c0ca33,d81b60,e53935,f4511e,fb8c00,fdd835,ffb300,ffd5dc,ffdfbf,c0aede,d1d4f9,b6e3f4&backgroundType=solid,gradientLinear&backgroundRotation=0,360,-350,-340,-330,-320&fontFamily=Arial&fontWeight=600' />
-                <BsChevronDown className='text-[1rem]' />
+                <BsChevronDown className='text-[1rem] text-white' />
             </button>
             {
                 open && (

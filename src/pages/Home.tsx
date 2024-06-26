@@ -10,7 +10,7 @@ import Indemandskills from '../components/core/Homepage/Indemandskills';
 
 const Home: React.FC = () => {
   return (
-    <div className='mt-20 w-[90%] max-w-[1250px] mx-auto'>
+    <div className='mt-[120px] w-[90%] max-w-[1250px] mx-auto'>
 
       <section className='w-full text-white gap-12 flex flex-col items-center justify-center'> {/* first section */}
 

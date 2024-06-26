@@ -12,7 +12,7 @@ type AuthTemplateProps = {
 }
 const AuthTemplate: React.FC<AuthTemplateProps> = ({ title,discription,authimg,formtype }) => {
     return (
-        <div className='mb-[100px] w-[90%] max-w-[1250px] mx-auto'>
+        <div className='mb-[100px] w-[90%] max-w-[1250px] mx-auto mt-[30px]'>
             <div className='mt-32 w-full flex gap-24 md:gap-0 text-ourred-50 md:flex-row flex-col-reverse md:justify-between md:items-center'>
                 <div className='w-full max-w-[450px] mx-auto md:mx-0 md:w-[45%] '>
                     <div className='w-full flex flex-col gap-8'>

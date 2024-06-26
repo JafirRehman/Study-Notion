@@ -9,11 +9,20 @@ import { useLocation } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { RootState } from "../../main";
 import { TiShoppingCart } from 'react-icons/ti'
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { apiConnector } from '../../services/apiConnector'
 import { categories } from '../../services/apis'
 import ProfileDropDown from '../core/Auth/ProfileDropDown'
+import { MdMenu } from "react-icons/md";
+import { RxCross1 } from "react-icons/rx";
+import useOnClickOutside from '../../hooks/useOnClickOutside';
+
 const Navbar: React.FC = () => {
+
+  const [navmenu, setNavmenu] = useState(false)
+  const mobilenav = useRef<HTMLDivElement>(null)
+  const crossbutton = useRef<HTMLDivElement>(null)
+  useOnClickOutside([mobilenav,crossbutton],()=> setNavmenu(false))
 
   const { token } = useSelector((state: RootState) => state.auth);
   const { user } = useSelector((state: RootState) => state.profile);
@@ -56,15 +65,22 @@ const Navbar: React.FC = () => {
 
   const NavbarLinks: Navlinks[] = Navdata
 
+
   return (
-    <div className='w-full flex h-[60px] py-3 border-b  border-[#52525B]'>
+    <div className='fixed w-full flex h-[60px] py-3 border-b  border-[#52525B] bg-[#0E0E11] z-40'>
       <div className='max-w-[1250px] w-[90%] mx-auto flex justify-between items-center'>
-        {/** logo */}
-        <div className=''>
+        <div className='text-white text-[2.5rem] lg:hidden'>
+          <div ref={crossbutton} onClick={() => setNavmenu(!navmenu)}>
+            {
+              navmenu ? <RxCross1 /> : <MdMenu  />
+            }
+          </div>
+          <div ref={mobilenav} className={`${!navmenu && 'hidden'}  fixed top-[60px] bottom-0 left-0 w-[160px] z-30 bg-[rgba(0,0,0,0.5)]`}></div>
+        </div>
+        <div className='hidden lg:block'>
           <Link to={'/'}><img className='w-[115px] mobile:w-[150px]' loading="lazy" src={logo} alt="Logo" /></Link>
         </div>
-        {/** navbar links */}
-        <nav>
+        <nav className='hidden lg:block'>
           <ul className='flex gap-10 text-ourred-50 text-[1.2rem] sm:text-[1.6rem]'>
             {
               NavbarLinks.map((link, index) => (
@@ -94,17 +110,20 @@ const Navbar: React.FC = () => {
         </nav>
 
         {/** Auth */}
-        <div className='flex gap-5 text-ourred-50'>
+        <div className='flex gap-5'>
           {
             token === null && (
               <>
-                <Buttoncomponent active={false} linkto='/login'>Login</Buttoncomponent>
-                <Buttoncomponent active={false} linkto='/signup'>Signup</Buttoncomponent>
+                <div className='hidden lg:block'><Buttoncomponent active={false} linkto='/login'>Login</Buttoncomponent></div>
+                <div className='hidden lg:block'><Buttoncomponent active={false} linkto='/signup'>Signup</Buttoncomponent></div>
               </>
             )
           }
-          <button>
-            <HiSearch className='rounded-full text-[30px]' />
+          <div className='lg:hidden'>
+            <Link to={'/'}><img className='w-[115px] mobile:w-[150px]' loading="lazy" src={logo} alt="Logo" /></Link>
+          </div>
+          <button className='text-white'>
+            <HiSearch className='rounded-full text-[23px] mobile:text-[30px]' />
           </button>
           {
             user && user.accountType !== "Instructor" && (
@@ -116,7 +135,9 @@ const Navbar: React.FC = () => {
               </Link>
             )
           }
-          <ProfileDropDown/>
+          {
+            !user && <ProfileDropDown />
+          }
 
         </div>
       </div>
