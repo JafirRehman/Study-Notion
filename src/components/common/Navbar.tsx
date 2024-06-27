@@ -16,13 +16,17 @@ import ProfileDropDown from '../core/Auth/ProfileDropDown'
 import { MdMenu } from "react-icons/md";
 import { RxCross1 } from "react-icons/rx";
 import useOnClickOutside from '../../hooks/useOnClickOutside';
+import { IoMdHome } from "react-icons/io";
+import { IoMdMail } from "react-icons/io";
+import { FaCircleInfo } from "react-icons/fa6";
+import { IoIosLogOut } from "react-icons/io";
 
 const Navbar: React.FC = () => {
-
+  const [mobsublinks, setMobsublinks] = useState(false)
   const [navmenu, setNavmenu] = useState(false)
   const mobilenav = useRef<HTMLDivElement>(null)
   const crossbutton = useRef<HTMLDivElement>(null)
-  useOnClickOutside([mobilenav,crossbutton],()=> setNavmenu(false))
+  useOnClickOutside([mobilenav, crossbutton], () => setNavmenu(false))
 
   const { token } = useSelector((state: RootState) => state.auth);
   const { user } = useSelector((state: RootState) => state.profile);
@@ -72,10 +76,66 @@ const Navbar: React.FC = () => {
         <div className='text-white text-[2.5rem] lg:hidden'>
           <div ref={crossbutton} onClick={() => setNavmenu(!navmenu)}>
             {
-              navmenu ? <RxCross1 /> : <MdMenu  />
+              navmenu ? <RxCross1 /> : <MdMenu />
             }
           </div>
-          <div ref={mobilenav} className={`${!navmenu && 'hidden'}  fixed top-[60px] bottom-0 left-0 w-[160px] z-30 bg-[rgba(0,0,0,0.5)]`}></div>
+          <div ref={mobilenav} className={`${!navmenu && 'hidden'} flex items-center text-[1.7rem] flex-col fixed top-[60px] bottom-0 left-0 w-[160px] z-30 bg-[#18181B]`}>
+            {
+              user && (
+                <div className='flex flex-col py-8 gap-4 items-center'>
+                  <Buttoncomponent active={false} linkto='/login'>Login</Buttoncomponent>
+                  <Buttoncomponent active={false} linkto='/signup'>Signup</Buttoncomponent>
+                </div>
+              )
+            }
+            <div className='py-10 flex flex-col items-center px-2 gap-6'>
+              <Link to={'/myprofile'} className='flex items-center gap-4 '>
+                <img className='w-[50px] h-[50px] rounded-full' alt='profile image' src='https://api.dicebear.com/6.x/initials/svg?seed=jafir malana&backgroundColor=00897b,00acc1,039be5,1e88e5,3949ab,43a047,5e35b1,7cb342,8e24aa,c0ca33,d81b60,e53935,f4511e,fb8c00,fdd835,ffb300,ffd5dc,ffdfbf,c0aede,d1d4f9,b6e3f4&backgroundType=solid,gradientLinear&backgroundRotation=0,360,-350,-340,-330,-320&fontFamily=Arial&fontWeight=600'/>
+                <div>
+                  <h1 className='font-bold'>Jafir Malana</h1>
+                  <h2 className='text-[1.3rem] text-[#6a6a76]'>Welcome Back</h2>
+                </div>
+              </Link>
+              <div className='flex gap-2 items-center'>
+                <TiShoppingCart />
+                <Link to={'/cart'}>Cart</Link>
+              </div>
+              <button className='flex gap-2 items-center'>
+                <IoIosLogOut />
+                <span>Logout</span>
+              </button>
+            </div>
+            <nav className='flex flex-col gap-10 items-center border-t w-full py-10'>
+              <Link to={'/'} className={`${matchRoutes('/') && 'text-ourred-500'} flex items-center gap-2`}>
+                <IoMdHome />
+                <span>Home</span>
+              </Link>
+              <div className='flex flex-col gap-4 w-full items-center'>
+                <div className='flex gap-2 items-center' onClick={() => setMobsublinks(!mobsublinks)}>
+                  <span>Catalog</span>
+                  <BsChevronDown className='text-[1.3rem]' />
+                </div>
+                {
+                  mobsublinks && <div className='flex w-full flex-col mt-5 text-[1.4rem]'>
+                    {
+                      sublinks?.map((category, index) => (
+                        <Link className='text-center w-full border-collapse border-y py-2' key={index} to={'/'}>{category.name}</Link>
+                      ))
+                    }
+                  </div>
+                }
+              </div>
+              <Link to={'/about'} className={`${matchRoutes('/about') && 'text-ourred-500'} flex items-center gap-2`}>
+                <FaCircleInfo />
+                <span>About Us</span>
+              </Link>
+              <Link to={'/contactus'} className={`${matchRoutes('/contactus') && 'text-ourred-500'} flex items-center gap-2`}>
+                <IoMdMail />
+                <span>Contact Us</span>
+              </Link>
+
+            </nav>
+          </div>
         </div>
         <div className='hidden lg:block'>
           <Link to={'/'}><img className='w-[115px] mobile:w-[150px]' loading="lazy" src={logo} alt="Logo" /></Link>
@@ -136,7 +196,7 @@ const Navbar: React.FC = () => {
             )
           }
           {
-            !user && <ProfileDropDown />
+            user && <ProfileDropDown />
           }
 
         </div>
