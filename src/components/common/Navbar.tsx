@@ -116,7 +116,7 @@ const Navbar: React.FC = () => {
                   <BsChevronDown className='text-[1.3rem]' />
                 </div>
                 {
-                  mobsublinks && <div className='flex w-full flex-col mt-5 text-[1.4rem]'>
+                  mobsublinks && <div className='flex w-full flex-col mt-5 text-[1.4rem]'>  
                     {
                       sublinks?.map((category, index) => (
                         <Link className='text-center w-full border-collapse border-y py-2' key={index} to={'/'}>{category.name}</Link>
